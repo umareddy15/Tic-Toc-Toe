@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe Neo - Premium Game</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Lucide Icons (CDN) for premium iconography -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-neon-x">X</span>
+        <span class="logo-divider">/</span>
+        <span class="logo-neon-o">O</span>
+        <h1>Tic-Tac-Toe <span class="badge">NEO</span></h1>
+      </div>
+      <div class="header-controls">
+        <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
+          <i data-lucide="volume-2"></i>
+        </button>
+        <button id="theme-btn" class="icon-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Layout Container (Allows side-by-side split layout on desktop) -->
+    <div class="main-layout">
+      <!-- Left Side: Game Arena -->
+      <main class="game-arena">
+        <div class="board-container glass-panel">
+          <div class="game-board" id="board">
+            <!-- 9 Cells -->
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+            <!-- Win Line SVG overlay -->
+            <svg class="win-line-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <line id="winning-line" x1="0" y1="0" x2="0" y2="0" />
+            </svg>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Side: Sidebar Controls -->
+      <aside class="sidebar-container">
+        <!-- Settings & Modes -->
+        <section class="game-setup glass-panel">
+          <div class="control-group">
+            <label>Game Mode</label>
+            <div class="segmented-control">
+              <button id="mode-pvp" class="active" data-mode="pvp">
+                <i data-lucide="users"></i> vs Friend
+              </button>
+              <button id="mode-pve" data-mode="pve">
+                <i data-lucide="cpu"></i> vs AI
+              </button>
+            </div>
+          </div>
+
+          <div id="ai-difficulty-container" class="control-group hidden">
+            <label>AI Difficulty</label>
+            <div class="segmented-control mini">
+              <button class="difficulty-btn" data-diff="easy">Easy</button>
+              <button class="difficulty-btn active" data-diff="medium">Medium</button>
+              <button class="difficulty-btn" data-diff="hard">Unbeatable</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard">
+          <div class="score-card card-x active" id="card-x">
+            <span class="player-label">Player X</span>
+            <span id="score-x" class="score-val">0</span>
+            <span class="turn-indicator">Your Turn</span>
+          </div>
+          <div class="score-card card-tie">
+            <span class="player-label">Ties</span>
+            <span id="score-ties" class="score-val">0</span>
+          </div>
+          <div class="score-card card-o" id="card-o">
+            <span id="player-o-label" class="player-label">Player O</span>
+            <span id="score-o" class="score-val">0</span>
+            <span class="turn-indicator">Your Turn</span>
+          </div>
+        </section>
+
+        <!-- Game Action Controls -->
+        <footer class="game-controls">
+          <div class="play-actions">
+            <button id="undo-btn" class="btn btn-secondary" disabled>
+              <i data-lucide="undo"></i> Undo
+            </button>
+            <button id="reset-btn" class="btn btn-primary">
+              <i data-lucide="refresh-cw"></i> Restart
+            </button>
+          </div>
+          <button id="clear-btn" class="btn btn-danger">
+            <i data-lucide="trash-2"></i> Clear Stats
+          </button>
+        </footer>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Game Over Modal Overlay -->
+  <div class="modal-overlay id-hidden" id="game-over-modal">
+    <div class="modal-content glass-panel animated-pop">
+      <div class="modal-header">
+        <h2 id="modal-title">Game Over</h2>
+      </div>
+      <div class="modal-body">
+        <p id="modal-message">Player X Wins!</p>
+        <div class="modal-icon-container" id="modal-icon">
+          <!-- Dynamic SVG injected here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="modal-play-again-btn" class="btn btn-primary btn-large">
+          <i data-lucide="play"></i> Play Again
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
